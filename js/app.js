@@ -82,7 +82,7 @@ const cardList = document.querySelectorAll('.card')
 let openCards = [];
 
 function revealSymbol (el) {
-  el.classList.add('show')
+  el.classList.add('show', 'open')
 }
 
 function addToOpen (el) {
