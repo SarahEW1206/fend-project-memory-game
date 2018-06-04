@@ -21,6 +21,10 @@
                 "fa fa-cube"
 ]
 
+//Get the deck, which is the ul that holds the cards as li's
+const deck = document.querySelector('.deck');
+
+
 
 /*
  * Display the cards on the page
@@ -43,6 +47,9 @@ function shuffle(array) {
 
     return array;
 }
+
+//Shuffle cards Array
+shuffle(cards);
 
 
 /*
