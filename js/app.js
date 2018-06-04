@@ -75,3 +75,22 @@ for (let i=0; i<cards.length; i++) {
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
+
+
+
+const cardList = document.querySelectorAll('.card')
+
+function revealSymbol (el) {
+  el.classList.add('show', 'open')
+}
+
+cardList.forEach(function (card) {
+ card.addEventListener('click', function() {
+   revealSymbol(card);
+})
+
+})
+
+
+
+
