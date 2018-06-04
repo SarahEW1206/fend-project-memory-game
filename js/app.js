@@ -82,6 +82,7 @@ for (let i=0; i<cards.length; i++) {
  const cardListArray = Array.from(cardList);
  let openCards = [];
  let matchedCards = [];
+ let moves = 0
 
 
  function revealSymbol (el) {
@@ -107,6 +108,11 @@ function noMatch () {
  openCards.splice(0, 2);
 }
 
+function counter() {
+  moves++;
+  document.querySelector('.moves').innerHTML = moves;
+}
+
 
 cardListArray.forEach(function (card) {
 
@@ -115,6 +121,7 @@ cardListArray.forEach(function (card) {
    if (openCards.length < 2 && !card.classList.contains('open') && !card.classList.contains('show') && !card.classList.contains('match') ) {
      revealSymbol(card);
      addToOpen(card);
+     counter();
      console.log(openCards)
    }
 
@@ -131,7 +138,8 @@ cardListArray.forEach(function (card) {
 
 }
 
-  card.addEventListener('click', checker);
+card.addEventListener('click', checker);
+
 
 
 
