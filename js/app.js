@@ -112,7 +112,7 @@ cardListArray.forEach(function (card) {
 
   function checker () {
 
-   if (openCards.length < 2) {
+   if (openCards.length < 2 && !card.classList.contains('open') && !card.classList.contains('show') && !card.classList.contains('match') ) {
      revealSymbol(card);
      addToOpen(card);
      console.log(openCards)
