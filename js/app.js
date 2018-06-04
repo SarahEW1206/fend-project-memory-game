@@ -79,15 +79,24 @@ for (let i=0; i<cards.length; i++) {
 
 
 const cardList = document.querySelectorAll('.card')
+let openCards = [];
 
 function revealSymbol (el) {
   el.classList.add('show', 'open')
 }
 
+function addToOpen (el) {
+  openCards.push(el);
+}
+
+
 cardList.forEach(function (card) {
  card.addEventListener('click', function() {
    revealSymbol(card);
-})
+   addToOpen(card);
+   console.log(openCards);
+
+ })
 
 })
 
