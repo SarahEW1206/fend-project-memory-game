@@ -51,6 +51,19 @@ function shuffle(array) {
 //Shuffle cards Array
 shuffle(cards);
 
+//For each element in the cards array, create a list item with the class "card" and the respective symbol as it's HTML, then append the li to the "deck" ul.
+for (let i=0; i<cards.length; i++) {
+
+    const li = document.createElement('li');
+    const symbol = cards[i];
+    
+    li.classList.add('card');
+    li.innerHTML = `<i class = "${symbol}">`;
+    
+    deck.appendChild(li);
+
+}
+
 
 /*
  * set up the event listener for a card. If a card is clicked:
