@@ -95,6 +95,11 @@ function matching () {
  openCards[1].classList.add('match');
 }
 
+function noMatch () {
+ openCards[0].classList.remove('show', 'open');
+ openCards[1].classList.remove('show', 'open');
+}
+
 
 
 cardList.forEach(function (card) {
@@ -109,9 +114,12 @@ cardList.forEach(function (card) {
    if (openCards.length === 2) {
       if (openCards[0].innerHTML === openCards[1].innerHTML) {
         matching();
+      } else {
+        setTimeout(noMatch, 600);
       }
-
    }
+
+
 
  })
 
