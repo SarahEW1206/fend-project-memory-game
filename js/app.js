@@ -3,23 +3,23 @@
  */
 
  let cards = [
-                "fa fa-diamond",
-                "fa fa-diamond",
-                "fa fa-paper-plane-o",
-                "fa fa-paper-plane-o",
-                "fa fa-anchor",
-                "fa fa-anchor",
-                "fa fa-bolt",
-                "fa fa-bolt",
-                "fa fa-leaf",
-                "fa fa-leaf",
-                "fa fa-bicycle",
-                "fa fa-bicycle",
-                "fa fa-bomb",
-                "fa fa-bomb",
-                "fa fa-cube",
-                "fa fa-cube"
-]
+ "fa fa-diamond",
+ "fa fa-diamond",
+ "fa fa-paper-plane-o",
+ "fa fa-paper-plane-o",
+ "fa fa-anchor",
+ "fa fa-anchor",
+ "fa fa-bolt",
+ "fa fa-bolt",
+ "fa fa-leaf",
+ "fa fa-leaf",
+ "fa fa-bicycle",
+ "fa fa-bicycle",
+ "fa fa-bomb",
+ "fa fa-bomb",
+ "fa fa-cube",
+ "fa fa-cube"
+ ]
 
 //Get the deck, which is the ul that holds the cards as li's
 const deck = document.querySelector('.deck');
@@ -35,17 +35,17 @@ const deck = document.querySelector('.deck');
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
+  var currentIndex = array.length, temporaryValue, randomIndex;
 
-    while (currentIndex !== 0) {
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex -= 1;
-        temporaryValue = array[currentIndex];
-        array[currentIndex] = array[randomIndex];
-        array[randomIndex] = temporaryValue;
-    }
+  while (currentIndex !== 0) {
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
 
-    return array;
+  return array;
 }
 
 //Shuffle cards Array
@@ -54,13 +54,13 @@ shuffle(cards);
 //For each element in the cards array, create a list item with the class "card" and the respective symbol as it's HTML, then append the li to the "deck" ul.
 for (let i=0; i<cards.length; i++) {
 
-    const li = document.createElement('li');
-    const symbol = cards[i];
-    
-    li.classList.add('card');
-    li.innerHTML = `<i class = "${symbol}">`;
-    
-    deck.appendChild(li);
+  const li = document.createElement('li');
+  const symbol = cards[i];
+
+  li.classList.add('card');
+  li.innerHTML = `<i class = "${symbol}">`;
+
+  deck.appendChild(li);
 
 }
 
@@ -78,11 +78,13 @@ for (let i=0; i<cards.length; i++) {
 
 
 
-const cardList = document.querySelectorAll('.card')
-let openCards = [];
+ const cardList = document.querySelectorAll('.card')
+ const cardListArray = Array.from(cardList);
+ let openCards = [];
+ let matchedCards = [];
 
 
-function revealSymbol (el) {
+ function revealSymbol (el) {
   el.classList.add('show', 'open')
 }
 
@@ -93,7 +95,10 @@ function addToOpen (el) {
 function matching () {
  openCards[0].classList.add('match');
  openCards[1].classList.add('match');
+ matchedCards.push(openCards[0]);
+ matchedCards.push(openCards[1]);
  openCards.splice(0, 2);
+ console.log(openCards);
 }
 
 function noMatch () {
@@ -103,30 +108,35 @@ function noMatch () {
 }
 
 
+cardListArray.forEach(function (card) {
 
-cardList.forEach(function (card) {
+  function checker () {
 
- card.addEventListener('click', function() {
-   
    if (openCards.length < 2) {
-      revealSymbol(card);
-      addToOpen(card);
+     revealSymbol(card);
+     addToOpen(card);
+     console.log(openCards)
    }
 
    if (openCards.length === 2) {
-      if (openCards[0].innerHTML === openCards[1].innerHTML) {
-        matching();
-      } else {
-        setTimeout(noMatch, 600);
-      }
+    if (openCards[0].innerHTML === openCards[1].innerHTML) {
+      matching();
+
+    } else {
+      setTimeout(noMatch, 600);
+    }
 
 
+  }
 
-   }
+}
 
- })
+  card.addEventListener('click', checker);
+
+
 
 })
+
 
 
 
