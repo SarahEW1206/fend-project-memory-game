@@ -95,10 +95,14 @@ cardList.forEach(function (card) {
  card.addEventListener('click', function() {
    
    if (openCards.length < 2) {
-
       revealSymbol(card);
       addToOpen(card);
+   }
 
+   if (openCards.length === 2) {
+      if (openCards[0].innerHTML === openCards[1].innerHTML) {
+        console.log("it's a match")
+   }
    }
 
  })
