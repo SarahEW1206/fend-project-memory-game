@@ -93,11 +93,13 @@ function addToOpen (el) {
 function matching () {
  openCards[0].classList.add('match');
  openCards[1].classList.add('match');
+ openCards.splice(0, 2);
 }
 
 function noMatch () {
  openCards[0].classList.remove('show', 'open');
  openCards[1].classList.remove('show', 'open');
+ openCards.splice(0, 2);
 }
 
 
@@ -117,9 +119,10 @@ cardList.forEach(function (card) {
       } else {
         setTimeout(noMatch, 600);
       }
+
+
+
    }
-
-
 
  })
 
