@@ -81,6 +81,7 @@ for (let i=0; i<cards.length; i++) {
 const cardList = document.querySelectorAll('.card')
 let openCards = [];
 
+
 function revealSymbol (el) {
   el.classList.add('show', 'open')
 }
@@ -88,6 +89,12 @@ function revealSymbol (el) {
 function addToOpen (el) {
   openCards.push(el);
 }
+
+function matching () {
+ openCards[0].classList.add('match');
+ openCards[1].classList.add('match');
+}
+
 
 
 cardList.forEach(function (card) {
@@ -101,8 +108,9 @@ cardList.forEach(function (card) {
 
    if (openCards.length === 2) {
       if (openCards[0].innerHTML === openCards[1].innerHTML) {
-        console.log("it's a match")
-   }
+        matching();
+      }
+
    }
 
  })
