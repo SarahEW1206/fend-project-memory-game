@@ -48,7 +48,7 @@ function shuffle(array) {
   return array;
 }
 
-//Shuffle cards Array
+//Shuffle the cards Array - i.e. shuffle the order of the symbols
 shuffle(cards);
 
 //For each element in the cards array, create a list item with the class "card" and the respective symbol as it's HTML, then append the li to the "deck" ul.
@@ -78,70 +78,75 @@ for (let i=0; i<cards.length; i++) {
 
 
 
+//Get a list of all the cards (from current layout)
  const cardList = document.querySelectorAll('.card')
+//Convert DOM List of cards to Array
  const cardListArray = Array.from(cardList);
+//Make an Array to hold the open (aka flipped) cards
  let openCards = [];
+//Make an Array to hold the matched cards
  let matchedCards = [];
+//Start moves counter at 0
  let moves = 0
 
-
+//Add class that will change the color when flipped and show the symbol
  function revealSymbol (el) {
   el.classList.add('show', 'open')
 }
 
+//Add flipped cards to the openCards Array
 function addToOpen (el) {
   openCards.push(el);
 }
 
+//If the cards match, add match class and push to matchedCards array. Clear out the openCards array for next set of moves.
 function matching () {
  openCards[0].classList.add('match');
  openCards[1].classList.add('match');
  matchedCards.push(openCards[0]);
  matchedCards.push(openCards[1]);
  openCards.splice(0, 2);
- console.log(openCards);
 }
 
+//If they don't match, remove the open class and symbol (flip them back over) and remove them from the open cards array.
 function noMatch () {
  openCards[0].classList.remove('show', 'open');
  openCards[1].classList.remove('show', 'open');
  openCards.splice(0, 2);
 }
 
+//Increment the counter with each move (each click) and change the HTML to reflect the total moves.
 function counter() {
   moves++;
   document.querySelector('.moves').innerHTML = moves;
 }
 
-
+//Iterate through the array of cards (the shuffled and "dealt" cards) and add an event listener that will run the "checker" function on click.
 cardListArray.forEach(function (card) {
 
   function checker () {
-
+//Check if there is room in the openCards Array (can only hold 2 cards at a time) and that the cards haven't already been flipped or matched (Use classes to verify this)
    if (openCards.length < 2 && !card.classList.contains('open') && !card.classList.contains('show') && !card.classList.contains('match') ) {
+     //If the card meets the criteria for being added to the openCards Array, run the following functions to "flip" it and increment total moves by 1.
      revealSymbol(card);
      addToOpen(card);
      counter();
-     console.log(openCards)
    }
 
+//If the openCards Array has 2 cards in it, check to see if they match! If they do, run the matching function. If they don't run the noMatch function.
    if (openCards.length === 2) {
     if (openCards[0].innerHTML === openCards[1].innerHTML) {
       matching();
 
     } else {
+      //Had to use setTimeout to keep the 2nd of 2 non-matching cards from flipping back over instantaneously.
       setTimeout(noMatch, 600);
     }
-
-
+    
   }
-
 }
 
 card.addEventListener('click', checker);
-
-
-
 
 })
 
