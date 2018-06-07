@@ -79,18 +79,21 @@ for (let i=0; i<cards.length; i++) {
 
 
 //Get a list of all the cards (from current layout)
- const cardList = document.querySelectorAll('.card')
+const cardList = document.querySelectorAll('.card')
 //Convert DOM List of cards to Array
- const cardListArray = Array.from(cardList);
+const cardListArray = Array.from(cardList);
 //Make an Array to hold the open (aka flipped) cards
- let openCards = [];
+let openCards = [];
 //Make an Array to hold the matched cards
- let matchedCards = [];
+let matchedCards = [];
 //Start moves counter at 0
- let moves = 0
+let moves = 0;
+//Start timer at 0
+let seconds = 0;
+
 
 //Add class that will change the color when flipped and show the symbol
- function revealSymbol(el) {
+function revealSymbol(el) {
   el.classList.add('show', 'open')
 }
 
@@ -99,10 +102,22 @@ function addToOpen(el) {
   openCards.push(el);
 }
 
+//Increment the counter with each move (each click) and change the HTML to reflect the total moves.
+function counter() {
+  moves++;
+  document.querySelector('.moves').innerHTML = moves;
+}
+
+function timer() {
+  seconds++;
+  document.querySelector('.time').innerHTML = seconds;
+}
+
+
 //If all cards are matched, show a message with the final score.
 function youWin() {
   if (matchedCards.length === 16) {    
-    document.querySelector('.victoryMessage').innerHTML = "YOU WIN"
+    document.querySelector('.victoryMessage').innerHTML = "You won in " + moves + " moves."
   }
 }
 
@@ -124,20 +139,14 @@ function noMatch() {
  openCards.splice(0, 2);
 }
 
-//Increment the counter with each move (each click) and change the HTML to reflect the total moves.
-function counter() {
-  moves++;
-  document.querySelector('.moves').innerHTML = moves;
-}
-
-
+function startGame() {
 
 //Iterate through the array of cards (the shuffled and "dealt" cards) and add an event listener that will run the "checker" function on click.
 cardListArray.forEach(function(card) {
 
   function checker() {
 //Check if there is room in the openCards Array (can only hold 2 cards at a time) and that the cards haven't already been flipped or matched (Use classes to verify this)
-   if (openCards.length < 2 && !card.classList.contains('open') && !card.classList.contains('show') && !card.classList.contains('match') ) {
+if (openCards.length < 2 && !card.classList.contains('open') && !card.classList.contains('show') && !card.classList.contains('match') ) {
      //If the card meets the criteria for being added to the openCards Array, run the following functions to "flip" it and increment total moves by 1.
      revealSymbol(card);
      addToOpen(card);
@@ -145,11 +154,11 @@ cardListArray.forEach(function(card) {
    }
 
 //If the openCards Array has 2 cards in it, check to see if they match! If they do, run the matching function. If they don't run the noMatch function.
-   if (openCards.length === 2) {
-    if (openCards[0].innerHTML === openCards[1].innerHTML) {
-      matching();
+if (openCards.length === 2) {
+  if (openCards[0].innerHTML === openCards[1].innerHTML) {
+    matching();
 
-    } else {
+  } else {
       //Had to use setTimeout to keep the 2nd of 2 non-matching cards from flipping back over instantaneously.
       setTimeout(noMatch, 600);
     }
@@ -162,6 +171,12 @@ card.addEventListener('click', checker);
 
 
 })
+
+setInterval(timer, 1000);
+
+}
+
+startGame();
 
 
 
