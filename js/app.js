@@ -2,6 +2,7 @@
  * Create a list that holds all of your cards
  */
 
+
  let cards = [
  "fa fa-diamond",
  "fa fa-diamond",
@@ -76,8 +77,6 @@ for (let i=0; i<cards.length; i++) {
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
 
-
-
 //Get a list of all the cards (from current layout)
 const cardList = document.querySelectorAll('.card')
 //Convert DOM List of cards to Array
@@ -100,6 +99,8 @@ function revealSymbol(el) {
 //Add flipped cards to the openCards Array
 function addToOpen(el) {
   openCards.push(el);
+   console.log(openCards);
+
 }
 
 //Increment the counter with each move (each click) and change the HTML to reflect the total moves.
@@ -111,10 +112,13 @@ function counter() {
 //Call this function with a 1000ms interval to count seconds.
 function timer() {
   //Add conditional so that timer stops when all cards are matched.
-  if (matchedCards.length < 16) {
-  seconds++;
-  document.querySelector('.time').innerHTML = seconds;
-}
+  function countSeconds() {
+    if (moves !== 0 && matchedCards.length < 16) {
+      seconds++;
+      document.querySelector('.time').innerHTML = seconds;
+    }
+  }
+  setInterval(countSeconds, 1000);
 }
 
 
@@ -131,7 +135,9 @@ function matching() {
  openCards[1].classList.add('match');
  matchedCards.push(openCards[0]);
  matchedCards.push(openCards[1]);
+ console.log(matchedCards);
  openCards.splice(0, 2);
+ console.log(openCards);
  //Run youWin function to see if matchedCards array is full, i.e. game is complete. 
  youWin();
 }
@@ -143,7 +149,6 @@ function noMatch() {
  openCards.splice(0, 2);
 }
 
-function startGame() {
 
 //Iterate through the array of cards (the shuffled and "dealt" cards) and add an event listener that will run the "checker" function on click.
 cardListArray.forEach(function(card) {
@@ -164,33 +169,18 @@ if (openCards.length === 2) {
 
   } else {
       //Had to use setTimeout to keep the 2nd of 2 non-matching cards from flipping back over instantaneously.
-      setTimeout(noMatch, 600);
+      setTimeout(noMatch, 200);
     }
-
   }
 }
-
 card.addEventListener('click', checker);
-
-
-
 })
+timer();
 
-setInterval(timer, 1000);
-
+function startGame() {
+ location.reload();
 }
 
-startGame();
 
-
-
-
-
-
-
-
-
-
-
-
+document.querySelector('.game-start').addEventListener('click', startGame);
 
