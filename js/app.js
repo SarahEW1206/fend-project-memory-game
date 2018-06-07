@@ -108,13 +108,17 @@ function counter() {
   document.querySelector('.moves').innerHTML = moves;
 }
 
+//Call this function with a 1000ms interval to count seconds.
 function timer() {
+  //Add conditional so that timer stops when all cards are matched.
+  if (matchedCards.length < 16) {
   seconds++;
   document.querySelector('.time').innerHTML = seconds;
 }
+}
 
 
-//If all cards are matched, show a message with the final score.
+//If all cards are matched, show a message with the final score. (moves and time)
 function youWin() {
   if (matchedCards.length === 16) {    
     document.querySelector('.victoryMessage').innerHTML = "You won in " + moves + " moves and " + seconds + " seconds!!"
