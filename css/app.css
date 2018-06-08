@@ -17,7 +17,9 @@ body {
 }
 
 body {
-    background: #ffffff url('../img/geometry2.png'); /* Background pattern from Subtle Patterns */
+    background-color: black;
+    /*background: #ffffff url('../img/geometry2.png'); */
+    /* Background pattern from Subtle Patterns */
     font-family: 'Coda', cursive;
 }
 
@@ -30,7 +32,9 @@ body {
 
 h1 {
     font-family: 'Open Sans', sans-serif;
-    font-weight: 300;
+    font-weight: 700;
+    font-size: 50px;
+    color: white;
 }
 
 /*
@@ -86,9 +90,10 @@ h1 {
  */
 
 .score-panel {
-    text-align: left;
+    text-align: center;
     width: 345px;
     margin-bottom: 10px;
+    color: white;
 }
 
 .score-panel .stars {
@@ -104,6 +109,5 @@ h1 {
 }
 
 .score-panel .game-start {
-    float: right;
     cursor: pointer;
 }
