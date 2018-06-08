@@ -157,18 +157,28 @@ function matching() {
  openCards[1].classList.add('match');
  matchedCards.push(openCards[0]);
  matchedCards.push(openCards[1]);
- openCards.splice(0, 2);
+ openCards = [];
  //Run youWin function to see if matchedCards array is full, i.e. game is complete. 
  youWin();
 }
 
 //If they don't match, remove the open class and symbol (flip them back over) and remove them from the open cards array.
 function noMatch() {
- openCards[0].classList.remove('show', 'open');
- openCards[1].classList.remove('show', 'open');
- // openCards[0].classList.add('wrong');
- // openCards[1].classList.add('wrong');
- openCards.splice(0, 2);
+
+  openCards.forEach(function(card) {
+
+    card.classList.add('wrong');
+
+    setTimeout(function() {
+    card.classList.remove('show', 'open', 'wrong');
+
+    console.log(openCards);
+    }, 1000)
+
+    openCards = [];
+
+ })
+
 }
 
 
@@ -192,13 +202,13 @@ if (openCards.length === 2) {
 
   } else {
       //Had to use setTimeout to keep the 2nd of 2 non-matching cards from flipping back over instantaneously.
-      setTimeout(noMatch, 1000);
+      noMatch();
     }
   }
 }
 card.addEventListener('click', checker);
 })
-// timer();
+timer();
 
 function startGame() {
  location.reload();
