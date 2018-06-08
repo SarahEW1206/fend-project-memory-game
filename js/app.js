@@ -191,7 +191,7 @@ if (openCards.length === 2) {
 
   } else {
       //Had to use setTimeout to keep the 2nd of 2 non-matching cards from flipping back over instantaneously.
-      setTimeout(noMatch, 200);
+      setTimeout(noMatch, 600);
     }
   }
 }
