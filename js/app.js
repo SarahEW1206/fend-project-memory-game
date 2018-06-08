@@ -105,8 +105,30 @@ function addToOpen(el) {
 
 //Increment the counter with each move (each click) and change the HTML to reflect the total moves.
 function counter() {
+  const stars = document.querySelector('.stars')
+  const star = document.querySelector('.star')
+
   moves++;
   document.querySelector('.moves').innerHTML = moves;
+
+  if(moves === 10) {
+    stars.removeChild(star);
+  }
+  if(moves === 20) {
+    stars.removeChild(star);
+  }
+  if(moves === 30) {
+    stars.removeChild(star); 
+  }
+  if(moves === 40) {
+    stars.removeChild(star); 
+  }
+  if(moves === 50) {
+    stars.removeChild(star); 
+    const sad = document.createElement("li");
+    sad.innerHTML = "<i class='fa fa-frown-o'></i>"
+    stars.appendChild(sad);
+  }
 }
 
 //Call this function with a 1000ms interval to count seconds.
