@@ -171,7 +171,6 @@ function noMatch() {
 
     setTimeout(function() {
     card.classList.remove('show', 'open', 'wrong');
-
     console.log(openCards);
     }, 1000)
 
