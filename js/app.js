@@ -146,8 +146,9 @@ function timer() {
 
 //If all cards are matched, show a message with the final score. (moves and time)
 function youWin() {
-  if (matchedCards.length === 16) {    
-    document.querySelector('.victoryMessage').innerHTML = "You won in " + moves + " moves and " + seconds + " seconds!!"
+  if (matchedCards.length === 16) {  
+    document.querySelector('.victory-message-box').classList.remove("hide");  
+    document.querySelector('.victory-message').innerHTML = "You won in " + moves + " moves and " + seconds + " seconds!!"
   }
 }
 
