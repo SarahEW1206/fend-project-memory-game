@@ -63,16 +63,27 @@ h1 {
     justify-content: center;
     align-items: center;
     box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
-    transition: all 0.3s ease;
+    transition: all 0.5s ease;
 }
 
 .deck .card.open {
     transform: rotateY(180deg);
     background: #02b3e4;
     cursor: default;
-    transition: all 0.3s ease;
+    transition: all 0.5s ease;
 }
 
+@keyframes wiggle {
+    0% { transform: rotate(0deg); }
+    25% { transform: rotate(-10deg); }
+   50% { transform: rotate(0deg); }
+   75% { transform: rotate(-10deg); }
+  100% { transform: rotate(0deg); }
+}
+
+.wrong {
+    animation: wiggle 0.5s;
+}
 
 .deck .card.show {
     font-size: 33px;

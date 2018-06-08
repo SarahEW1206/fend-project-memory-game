@@ -157,9 +157,7 @@ function matching() {
  openCards[1].classList.add('match');
  matchedCards.push(openCards[0]);
  matchedCards.push(openCards[1]);
- console.log(matchedCards);
  openCards.splice(0, 2);
- console.log(openCards);
  //Run youWin function to see if matchedCards array is full, i.e. game is complete. 
  youWin();
 }
@@ -168,6 +166,8 @@ function matching() {
 function noMatch() {
  openCards[0].classList.remove('show', 'open');
  openCards[1].classList.remove('show', 'open');
+ // openCards[0].classList.add('wrong');
+ // openCards[1].classList.add('wrong');
  openCards.splice(0, 2);
 }
 
@@ -177,11 +177,12 @@ cardListArray.forEach(function(card) {
 
   function checker() {
 //Check if there is room in the openCards Array (can only hold 2 cards at a time) and that the cards haven't already been flipped or matched (Use classes to verify this)
-if (openCards.length < 2 && !card.classList.contains('open') && !card.classList.contains('show') && !card.classList.contains('match') ) {
+if (openCards.length <= 2 && !card.classList.contains('open') && !card.classList.contains('show') && !card.classList.contains('match') ) {
      //If the card meets the criteria for being added to the openCards Array, run the following functions to "flip" it and increment total moves by 1.
      revealSymbol(card);
      addToOpen(card);
      counter();
+     console.log(openCards);
    }
 
 //If the openCards Array has 2 cards in it, check to see if they match! If they do, run the matching function. If they don't run the noMatch function.
@@ -191,13 +192,13 @@ if (openCards.length === 2) {
 
   } else {
       //Had to use setTimeout to keep the 2nd of 2 non-matching cards from flipping back over instantaneously.
-      setTimeout(noMatch, 600);
+      setTimeout(noMatch, 1000);
     }
   }
 }
 card.addEventListener('click', checker);
 })
-timer();
+// timer();
 
 function startGame() {
  location.reload();
