@@ -206,7 +206,6 @@ function noMatch() {
 }
 
 
-function applyChecker() {
 //Iterate through the array of cards (the shuffled and "dealt" cards) and add an event listener that will run the "checker" function on click.
 cardListArray.forEach(function(card) {
 
@@ -234,60 +233,14 @@ card.addEventListener('click', checker);
 
 })
 
-}
-
-//Call the function to add the event listener to each card
-applyChecker();
-
 //call the timer function
 timer();
 
-function test() {
-  console.log("testing")
-}
-
-
-//reset the game board and score board.
+//reset the game
 function restartGame() {
-  //Reset stars to five
-  stars.innerHTML = `
-    <li class='star'><i class='fa fa-star'></i></li>
-    <li class='star'><i class='fa fa-star'></i></li>
-    <li class='star'><i class='fa fa-star'></i></li>
-    <li class='star'><i class='fa fa-star'></i></li>
-    <li class='star'><i class='fa fa-star'></i></li>
-    `
-    ;
-
-  //Reset moves to 0
-  moves = 0;
-  document.querySelector('.moves').innerHTML = moves;
- 
-  //Reset timer to 0
-  seconds = 0;
-  document.querySelector('.time').innerHTML = seconds;
-
-  //Empty the deck, reshuffle, redeal the cards.
-  deck.innerHTML = "";
-  shuffle(cards);
-  dealCards();
-
-  
-  cardListArray.forEach(function(item) {
-    item.classList.remove('open', 'show', 'match', 'wrong')
-  })  
-
+  location.reload();
 }
-
-function playAgain() {
-
-  const modal = document.querySelector('.victory-message-box')
-  modal.style.display = 'none';
-  restartGame();
-}
-
-
 
 document.querySelector('.game-start').addEventListener('click', restartGame);
-document.querySelector('.play-again').addEventListener('click', playAgain);
+document.querySelector('.play-again').addEventListener('click', restartGame);
 
