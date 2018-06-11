@@ -248,7 +248,7 @@ function test() {
 
 
 //reset the game board and score board.
-function startGame() {
+function restartGame() {
   //Reset stars to five
   stars.innerHTML = `
     <li class='star'><i class='fa fa-star'></i></li>
@@ -275,13 +275,19 @@ function startGame() {
   
   cardListArray.forEach(function(item) {
     item.classList.remove('open', 'show', 'match', 'wrong')
-  })
-  
-  applyChecker();
+  })  
 
 }
 
+function playAgain() {
 
-document.querySelector('.game-start').addEventListener('click', startGame);
-document.querySelector('.play-again').addEventListener('click', startGame);
+  const modal = document.querySelector('.victory-message-box')
+  modal.style.display = 'none';
+  restartGame();
+}
+
+
+
+document.querySelector('.game-start').addEventListener('click', restartGame);
+document.querySelector('.play-again').addEventListener('click', playAgain);
 
