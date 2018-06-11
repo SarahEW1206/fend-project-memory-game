@@ -34,7 +34,7 @@ h1 {
     font-family: 'Open Sans', sans-serif;
     font-weight: 700;
     font-size: 50px;
-    color: white;
+    color: #fff;
 }
 
 /*
@@ -44,7 +44,9 @@ h1 {
 .deck {
     width: 660px;
     min-height: 680px;
-    background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
+    /*background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);*/
+    background: #ffffff url('../img/alberteinstein.png'); 
+    background-size: cover;
     padding: 32px;
     border-radius: 10px;
     box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
@@ -58,7 +60,7 @@ h1 {
 .deck .card {
     height: 125px;
     width: 125px;
-    background: #2e3d49;
+    background: #2d456b;
     font-size: 0;
     color: #ffffff;
     border-radius: 8px;
@@ -107,12 +109,13 @@ h1 {
 
 .score-panel {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;    
     width: 100%;
     margin-bottom: 20px;
     color: white;
-    background-color: blue;
+    background-color: #2d456b;
     padding: 10px 100px;
 }
 
@@ -120,7 +123,8 @@ h1 {
     margin: 0;
     padding: 0;
     display: inline-block;
-    margin: 0 5px 0 0;
+    margin: 5px;
+    min-width: 85px;
 }
 
 .score-panel .stars li {
@@ -131,11 +135,14 @@ h1 {
 .score-panel .game-start {
     cursor: pointer;
     padding: 15px 20px;
+    margin: 5px;
+    min-width: 85px;
 }
 
 .moves-and-time {
-/*    display: inline;
-*/}
+min-width: 85px;
+margin: 5px;
+}
 
 /*
  * Styles for the Victory Message
@@ -147,10 +154,30 @@ h1 {
     height: 50%;
     background-color: #ffffff;
     z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 100 black;
+    border-radius: 10px;
+    border: 2px solid #bababa;
+}
+
+.victory-message-box .game-start {
+    cursor: pointer;
+    padding: 15px 20px;
+    margin: 15px 0;
+    min-width: 85px;
 }
 
 .hide {
     visibility: hidden;
+}
+
+p.victory-message {
+    font-size: 50px;
+    color: #2d456b;
+    padding: 0 20px;
 }
 
 
