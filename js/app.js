@@ -167,15 +167,26 @@ function noMatch() {
 
   openCards.forEach(function(card) {
 
-    card.classList.add('wrong');
 
-    setTimeout(function() {
-    card.classList.remove('show', 'open', 'wrong');
+      setTimeout(function() {
 
-    console.log(openCards);
-    }, 1000)
+          card.classList.add('wrong');
 
-    openCards = [];
+      }, 500)
+
+      setTimeout(function() {
+
+          card.classList.remove('show', 'wrong');
+
+      }, 1500)
+
+      setTimeout(function() {
+
+          card.classList.remove('open');
+
+      }, 1600)
+
+      openCards = [];
 
  })
 
@@ -201,7 +212,6 @@ if (openCards.length === 2) {
     matching();
 
   } else {
-      //Had to use setTimeout to keep the 2nd of 2 non-matching cards from flipping back over instantaneously.
       noMatch();
     }
   }
