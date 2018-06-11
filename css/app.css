@@ -91,6 +91,7 @@ h1 {
 
 .score-panel {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;    
     width: 100%;
@@ -104,7 +105,8 @@ h1 {
     margin: 0;
     padding: 0;
     display: inline-block;
-    margin: 0 5px 0 0;
+    margin: 5px;
+    min-width: 85px;
 }
 
 .score-panel .stars li {
@@ -115,11 +117,14 @@ h1 {
 .score-panel .game-start {
     cursor: pointer;
     padding: 15px 20px;
+    margin: 5px;
+    min-width: 85px;
 }
 
 .moves-and-time {
-/*    display: inline;
-*/}
+min-width: 85px;
+margin: 5px;
+}
 
 /*
  * Styles for the Victory Message
