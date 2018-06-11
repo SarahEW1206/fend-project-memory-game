@@ -168,14 +168,19 @@ function noMatch() {
 
   openCards.forEach(function(card) {
 
-    card.classList.add('wrong');
+      setTimeout(function() {
+          card.classList.add('wrong');
+      }, 500)
 
-    setTimeout(function() {
-    card.classList.remove('show', 'open', 'wrong');
-    console.log(openCards);
-    }, 1000)
+      setTimeout(function() {
+          card.classList.remove('show', 'wrong');
+      }, 1500)
 
-    openCards = [];
+      setTimeout(function() {
+          card.classList.remove('open');
+      }, 1600)
+
+      openCards = [];
 
  })
 
