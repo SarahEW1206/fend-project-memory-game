@@ -53,7 +53,9 @@ function shuffle(array) {
 shuffle(cards);
 
 //For each element in the cards array, create a list item with the class "card" and the respective symbol as it's HTML, then append the li to the "deck" ul.
-for (let i=0; i<cards.length; i++) {
+function dealCards() {
+
+  for (let i=0; i<cards.length; i++) {
 
   const li = document.createElement('li');
   const symbol = cards[i];
@@ -64,6 +66,10 @@ for (let i=0; i<cards.length; i++) {
   deck.appendChild(li);
 
 }
+
+}
+
+dealCards();
 
 
 /*
@@ -99,35 +105,48 @@ function revealSymbol(el) {
 //Add flipped cards to the openCards Array
 function addToOpen(el) {
   openCards.push(el);
-   console.log(openCards);
-
 }
+
+const stars = document.querySelector('.stars')
 
 //Increment the counter with each move (each click) and change the HTML to reflect the total moves.
 function counter() {
-  const stars = document.querySelector('.stars')
-  const star = document.querySelector('.star')
 
   moves++;
   document.querySelector('.moves').innerHTML = moves;
 
-  if(moves === 10) {
-    stars.removeChild(star);
+  if(moves >= 10 && moves < 20 ) {
+    stars.innerHTML = `
+    <li class='star'><i class='fa fa-star'></i></li>
+    <li class='star'><i class='fa fa-star'></i></li>
+    <li class='star'><i class='fa fa-star'></i></li>
+    <li class='star'><i class='fa fa-star'></i></li>
+    `
+    ;
   }
-  if(moves === 20) {
-    stars.removeChild(star);
+
+  if(moves >= 20 && moves < 30 ) {
+    stars.innerHTML = `
+    <li class='star'><i class='fa fa-star'></i></li>
+    <li class='star'><i class='fa fa-star'></i></li>
+    <li class='star'><i class='fa fa-star'></i></li>
+    `
+    ;
   }
-  if(moves === 30) {
-    stars.removeChild(star); 
+
+  if(moves >= 30 && moves < 40 ) {
+    stars.innerHTML = `
+    <li class='star'><i class='fa fa-star'></i></li>
+    <li class='star'><i class='fa fa-star'></i></li>
+    `
+    ;
   }
-  if(moves === 40) {
-    stars.removeChild(star); 
-  }
-  if(moves === 50) {
-    stars.removeChild(star); 
-    const sad = document.createElement("li");
-    sad.innerHTML = "<i class='fa fa-frown-o'></i>"
-    stars.appendChild(sad);
+
+  if(moves >= 40) {
+    stars.innerHTML = `
+    <li class='star'><i class='fa fa-star'></i></li>
+    `
+    ;
   }
 }
 
@@ -187,6 +206,7 @@ function noMatch() {
 }
 
 
+function applyChecker() {
 //Iterate through the array of cards (the shuffled and "dealt" cards) and add an event listener that will run the "checker" function on click.
 cardListArray.forEach(function(card) {
 
@@ -206,19 +226,62 @@ if (openCards.length === 2) {
     matching();
 
   } else {
-      //Had to use setTimeout to keep the 2nd of 2 non-matching cards from flipping back over instantaneously.
       noMatch();
     }
   }
 }
 card.addEventListener('click', checker);
+
 })
+
+}
+
+//Call the function to add the event listener to each card
+applyChecker();
+
+//call the timer function
 timer();
 
+function test() {
+  console.log("testing")
+}
+
+
+//reset the game board and score board.
 function startGame() {
- location.reload();
+  //Reset stars to five
+  stars.innerHTML = `
+    <li class='star'><i class='fa fa-star'></i></li>
+    <li class='star'><i class='fa fa-star'></i></li>
+    <li class='star'><i class='fa fa-star'></i></li>
+    <li class='star'><i class='fa fa-star'></i></li>
+    <li class='star'><i class='fa fa-star'></i></li>
+    `
+    ;
+
+  //Reset moves to 0
+  moves = 0;
+  document.querySelector('.moves').innerHTML = moves;
+ 
+  //Reset timer to 0
+  seconds = 0;
+  document.querySelector('.time').innerHTML = seconds;
+
+  //Empty the deck, reshuffle, redeal the cards.
+  deck.innerHTML = "";
+  shuffle(cards);
+  dealCards();
+
+  
+  cardListArray.forEach(function(item) {
+    item.classList.remove('open', 'show', 'match', 'wrong')
+  })
+  
+  applyChecker();
+
 }
 
 
 document.querySelector('.game-start').addEventListener('click', startGame);
+document.querySelector('.play-again').addEventListener('click', startGame);
 
