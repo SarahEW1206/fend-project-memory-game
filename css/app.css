@@ -154,23 +154,25 @@ margin: 5px;
 
 .victory-message-box {
     position: fixed;
-    width: 50%;
-    height: 50%;
+    width: 70%;
+    height: 70%;
     background-color: #ffffff;
     z-index: 1000;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    box-shadow: 0 0 100 black;
+    box-shadow: 0px 0px 600px black;
     border-radius: 10px;
     border: 2px solid #bababa;
+    text-align: center;
+    top: 25%;
 }
 
 .victory-message-box .game-start {
     cursor: pointer;
     padding: 15px 20px;
-    margin: 15px 0;
+    margin-bottom: 15px;
     min-width: 85px;
 }
 
@@ -180,6 +182,7 @@ margin: 5px;
 
 p.victory-message {
     font-size: 50px;
+    line-height: 50px;
     color: #2d456b;
     padding: 0 20px;
 }
