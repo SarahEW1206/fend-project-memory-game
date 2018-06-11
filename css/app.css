@@ -136,10 +136,22 @@ margin: 5px;
     height: 50%;
     background-color: #ffffff;
     z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 100 black;
+    border-radius: 10px;
+    border: 2px solid #bababa;
 }
 
 .hide {
     visibility: hidden;
+}
+
+p.victory-message {
+    font-size: 50px;
+    color: #2d456b;
+    padding: 0 20px;
 }
 
 
