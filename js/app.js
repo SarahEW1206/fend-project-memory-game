@@ -55,15 +55,15 @@ function dealCards() {
 
   for (let i=0; i<cards.length; i++) {
 
-  const li = document.createElement('li');
-  const symbol = cards[i];
+    const li = document.createElement('li');
+    const symbol = cards[i];
 
-  li.classList.add('card');
-  li.innerHTML = `<i class = "${symbol}">`;
+    li.classList.add('card');
+    li.innerHTML = `<i class = "${symbol}">`;
 
-  deck.appendChild(li);
+    deck.appendChild(li);
 
-}
+  }
 
 }
 
@@ -148,7 +148,7 @@ function counter() {
   }
 }
 
-//Call this function with a 1000ms interval to count seconds.
+// Call this function with a 1000ms interval to count seconds.
 function timer() {
   //Add conditional so that timer stops when all cards are matched.
   function countSeconds() {
@@ -159,6 +159,9 @@ function timer() {
   }
   setInterval(countSeconds, 1000);
 }
+
+//call the timer function
+timer();
 
 
 //If all cards are matched, show a message with the final score. (moves and time)
@@ -185,36 +188,37 @@ function noMatch() {
 
   openCards.forEach(function(card) {
 
-      setTimeout(function() {
-          card.classList.add('wrong');
-      }, 500)
+    setTimeout(function() {
+      card.classList.add('wrong');
+    }, 500)
 
-      setTimeout(function() {
-          card.classList.remove('show', 'wrong');
-      }, 1500)
+    setTimeout(function() {
+      card.classList.remove('show', 'wrong');
+    }, 1500)
 
-      setTimeout(function() {
-          card.classList.remove('open');
-      }, 1600)
+    setTimeout(function() {
+      card.classList.remove('open');
+    }, 1600)
 
-      openCards = [];
+    openCards = [];
 
- })
-
+  })
 }
 
 
-//Iterate through the array of cards (the shuffled and "dealt" cards) and add an event listener that will run the "checker" function on click.
-cardListArray.forEach(function(card) {
 
-  function checker() {
+
+//Iterate through the array of cards (the shuffled and "dealt" cards) and add an event listener that will run the "checker" function on click.
+
+function checker(element) {
 //Check if there is room in the openCards Array (can only hold 2 cards at a time) and that the cards haven't already been flipped or matched (Use classes to verify this)
-if (openCards.length <= 2 && !card.classList.contains('open') && !card.classList.contains('show') && !card.classList.contains('match') ) {
+
+if (openCards.length <= 2 && !element.classList.contains('open') && !element.classList.contains('show') && !element.classList.contains('match') ) {
      //If the card meets the criteria for being added to the openCards Array, run the following functions to "flip" it and increment total moves by 1.
-     revealSymbol(card);
-     addToOpen(card);
+     revealSymbol(element);
+     addToOpen(element);
      counter();
-     console.log(openCards);
+
    }
 
 //If the openCards Array has 2 cards in it, check to see if they match! If they do, run the matching function. If they don't run the noMatch function.
@@ -223,22 +227,59 @@ if (openCards.length === 2) {
     matching();
 
   } else {
-      noMatch();
-    }
+    noMatch();
   }
 }
-card.addEventListener('click', checker);
 
-})
-
-//call the timer function
-timer();
-
-//reset the game
-function restartGame() {
-  location.reload();
 }
 
-document.querySelector('.game-start').addEventListener('click', restartGame);
-document.querySelector('.play-again').addEventListener('click', restartGame);
+
+function reset() {
+    //Reset stars to five
+
+    stars.innerHTML = `
+    <li class='star'><i class='fa fa-star'></i></li>
+    <li class='star'><i class='fa fa-star'></i></li>
+    <li class='star'><i class='fa fa-star'></i></li>
+    <li class='star'><i class='fa fa-star'></i></li>
+    <li class='star'><i class='fa fa-star'></i></li>
+    `
+    ;
+
+  //Reset moves to 0
+  moves = 0;
+  document.querySelector('.moves').innerHTML = moves;
+
+  //Reset timer to 0
+  seconds = 0;
+  document.querySelector('.time').innerHTML = seconds;
+
+  //Empty the deck, reshuffle, redeal the cards.
+  deck.innerHTML = "";
+  shuffle(cards);
+  dealCards();
+
+  const newCard = document.querySelectorAll('.card')
+
+  newCard.forEach(function(card) {
+    card.classList.remove('open', 'show', 'match', 'wrong');
+    card.addEventListener('click', function(){
+      this.addEventListener('click', checker(this))
+    })
+  })
+}
+
+
+function playAgain() {
+  const modal = document.querySelector('.victory-message-box')
+  modal.style.display = 'none';
+  reset();
+}
+
+window.addEventListener('load', reset);
+document.querySelector('.game-start').addEventListener('click', reset);
+document.querySelector('.play-again').addEventListener('click', playAgain);
+
+
+
 
