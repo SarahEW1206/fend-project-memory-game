@@ -168,7 +168,14 @@ timer();
 function youWin() {
   if (matchedCards.length === 16) {  
     document.querySelector('.victory-message-box').classList.remove('hide');
-    document.querySelector('.victory-message').innerHTML = "You won in " + moves + " moves and " + seconds + " seconds!!"
+    const starRating = stars.innerHTML;
+    document.querySelector('.victory-message').innerHTML = `
+    <p>You won in ${moves} moves and ${seconds} seconds!!<p>
+    <p>Your star rating:</p> 
+    <ul class="stars">
+    ${starRating}
+    </ul>
+    `
   }
 }
 

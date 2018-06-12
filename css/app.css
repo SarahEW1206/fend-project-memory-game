@@ -187,4 +187,14 @@ p.victory-message {
     padding: 0 20px;
 }
 
+ul.stars {
+    list-style: none;
+    padding: 0;
+}
+
+li.star {
+    display: inline;
+    padding: 3px;
+}
+
 
