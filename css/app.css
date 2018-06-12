@@ -20,7 +20,7 @@ body {
     background-color: black;
     /*background: #ffffff url('../img/geometry2.png'); */
     /* Background pattern from Subtle Patterns */
-    font-family: 'Coda', cursive;
+    font-family: 'Coda', sans-serif;
 }
 
 .container {
@@ -31,9 +31,28 @@ body {
 }
 
 h1 {
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 700;
+    font-family: 'Coda', sans-serif;
+    font-weight: 800;
     font-size: 50px;
+    color: #fff;
+}
+
+input[type="button" i] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    font-family: 'Coda', sans-serif;
+    font-size: 16px;
+    color: #333;
+    padding: 5px 10px;
+    cursor: pointer;
+    padding: 10px 15px;
+    background-color: rgba(255, 255, 255, 1.0);
+    transition: all 0.4s ease;
+}
+
+input[type="button" i]:hover {
+    background-color: rgba(255, 255, 255, 0.5);
     color: #fff;
 }
 
@@ -41,7 +60,7 @@ h1 {
  * Styles for the deck of cards
  */
 
-.deck {
+ .deck {
     width: 660px;
     min-height: 680px;
     /*background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);*/
@@ -83,9 +102,9 @@ h1 {
     0% {transform: rotateY(180deg); }
     0% { transform: translate(2px); }
     25% { transform: translate(-2px); }
-   50% { transform: translate(2px); }
-   75% { transform: translate(-2px); }
-  100% { transform: translate(2px); }
+    50% { transform: translate(2px); }
+    75% { transform: translate(-2px); }
+    100% { transform: translate(2px); }
 }
 
 .wrong {
@@ -111,7 +130,7 @@ h1 {
  * Styles for the Score Panel
  */
 
-.score-panel {
+ .score-panel {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -137,22 +156,20 @@ h1 {
 }
 
 .score-panel .game-start {
-    cursor: pointer;
-    padding: 15px 20px;
     margin: 5px;
     min-width: 85px;
 }
 
 .moves-and-time {
-min-width: 85px;
-margin: 5px;
+    min-width: 85px;
+    margin: 5px;
 }
 
 /*
  * Styles for the Victory Message
  */
 
-.victory-message-box {
+ .victory-message-box {
     position: fixed;
     width: 70%;
     height: 70%;
