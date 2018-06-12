@@ -160,14 +160,14 @@ function timer() {
   setInterval(countSeconds, 1000);
 }
 
-//call the timer function
+// //call the timer function
 timer();
 
 
 //If all cards are matched, show a message with the final score. (moves and time)
 function youWin() {
   if (matchedCards.length === 16) {  
-    document.querySelector('.victory-message-box').classList.remove("hide");  
+    document.querySelector('.victory-message-box').classList.remove('hide');
     document.querySelector('.victory-message').innerHTML = "You won in " + moves + " moves and " + seconds + " seconds!!"
   }
 }
@@ -208,24 +208,23 @@ function noMatch() {
 
 
 
-//Iterate through the array of cards (the shuffled and "dealt" cards) and add an event listener that will run the "checker" function on click.
 
+//This is the function that will be called on the click event on the cards. 
 function checker(element) {
 //Check if there is room in the openCards Array (can only hold 2 cards at a time) and that the cards haven't already been flipped or matched (Use classes to verify this)
 
-if (openCards.length <= 2 && !element.classList.contains('open') && !element.classList.contains('show') && !element.classList.contains('match') ) {
-     //If the card meets the criteria for being added to the openCards Array, run the following functions to "flip" it and increment total moves by 1.
-     revealSymbol(element);
-     addToOpen(element);
-     counter();
 
-   }
+//If the card meets the criteria for being added to the openCards Array, run the following functions to "flip" it and increment total moves by 1.
+if (openCards.length <= 2 && !element.classList.contains('open') && !element.classList.contains('show') && !element.classList.contains('match') ) {
+ revealSymbol(element);
+ addToOpen(element);
+ counter();
+}
 
 //If the openCards Array has 2 cards in it, check to see if they match! If they do, run the matching function. If they don't run the noMatch function.
 if (openCards.length === 2) {
   if (openCards[0].innerHTML === openCards[1].innerHTML) {
     matching();
-
   } else {
     noMatch();
   }
@@ -233,10 +232,17 @@ if (openCards.length === 2) {
 
 }
 
-
+//this is the funtion that will be called on load, on clicking reset button and on clicking the play again button. We call checker() inside of here and pass the card as the parameter.
 function reset() {
-    //Reset stars to five
 
+   //If modal is showing, hide the modal when clicked. 
+   const modal = document.querySelector('.victory-message-box')
+   modal.classList.add('hide');
+
+   //Clear out the matched cards array
+   matchedCards = [];
+
+    //Reset stars to five
     stars.innerHTML = `
     <li class='star'><i class='fa fa-star'></i></li>
     <li class='star'><i class='fa fa-star'></i></li>
@@ -248,37 +254,39 @@ function reset() {
 
   //Reset moves to 0
   moves = 0;
+  //Make scoreboard reflect the reset.
   document.querySelector('.moves').innerHTML = moves;
 
   //Reset timer to 0
   seconds = 0;
+  //Make scoreboard reflect the reset.
   document.querySelector('.time').innerHTML = seconds;
+
 
   //Empty the deck, reshuffle, redeal the cards.
   deck.innerHTML = "";
   shuffle(cards);
   dealCards();
 
-  const newCard = document.querySelectorAll('.card')
+  //Get a list of the cards in the new deck.
+  const newCards = document.querySelectorAll('.card')
 
-  newCard.forEach(function(card) {
-    card.classList.remove('open', 'show', 'match', 'wrong');
+  //Iterate throught the new deck of cards
+  newCards.forEach(function(card) {
+     //remove all the classes so that they are flipped face down.
+     card.classList.remove('open', 'show', 'match', 'wrong');
+    //Apply the checker function to each card. Had to nest this to protect it from the button hijacking the event listener. There's probably a cleaner way, but, hey it works! The Button still takes on the first listener, and we use that behavior to our advantage by saying, "ok, button, now go ahead and put this 2nd listener on the cards."
     card.addEventListener('click', function(){
       this.addEventListener('click', checker(this))
     })
   })
+
 }
 
-
-function playAgain() {
-  const modal = document.querySelector('.victory-message-box')
-  modal.style.display = 'none';
-  reset();
-}
 
 window.addEventListener('load', reset);
 document.querySelector('.game-start').addEventListener('click', reset);
-document.querySelector('.play-again').addEventListener('click', playAgain);
+document.querySelector('.play-again').addEventListener('click', reset);
 
 
 

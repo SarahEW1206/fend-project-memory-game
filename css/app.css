@@ -169,15 +169,15 @@ margin: 5px;
     top: 25%;
 }
 
+.hide {
+    display: none;
+}
+
 .victory-message-box .game-start {
     cursor: pointer;
     padding: 15px 20px;
     margin-bottom: 15px;
     min-width: 85px;
-}
-
-.hide {
-    visibility: hidden;
 }
 
 p.victory-message {
