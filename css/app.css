@@ -214,4 +214,16 @@ li.star {
     padding: 3px;
 }
 
+/*footer*/
 
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+}
+
+footer a {
+    text-decoration: none;
+    color: #2dc;
+}
